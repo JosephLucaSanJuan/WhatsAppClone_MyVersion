@@ -39,7 +39,7 @@ class SelectContactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val addContactButton = binding.addContactButton
         addContactButton.setOnClickListener {
-            val action = SelectContactFragmentDirections.actionSelectContactFragmentToChatListFragment()
+            val action = SelectContactFragmentDirections.actionSelectContactFragmentToChatFragment()
             findNavController().navigate(action)
         }
     }
