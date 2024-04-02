@@ -20,7 +20,7 @@ class CustomAdapter(private val dataSet: List<Chat>):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.text_row_item, parent, false)
+            .inflate(R.layout.fragment_chat_list, parent, false)
         return ViewHolder(view)
     }
 

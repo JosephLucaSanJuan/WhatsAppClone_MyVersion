@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val navControlller = navHostFragment.navController
         navigationBar.setupWithNavController(navControlller)
 
-        val dataset = ChatRepository.chat
+        val dataset = ChatRepository.getInstance()
         val customAdapter = CustomAdapter(dataset)
         val recyclerView: RecyclerView = findViewById(R.id.fragment_container)
         recyclerView.adapter = customAdapter
