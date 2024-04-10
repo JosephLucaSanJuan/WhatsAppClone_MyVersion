@@ -5,8 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.alanturing.cpifp.whatsappclone.R
+import com.alanturing.cpifp.whatsappclone.chat.data.Contact
+import com.alanturing.cpifp.whatsappclone.chat.data.ContactsRepository
+import com.alanturing.cpifp.whatsappclone.chat.data.Message
+import com.alanturing.cpifp.whatsappclone.chat.data.MessageRepository
 import com.alanturing.cpifp.whatsappclone.databinding.FragmentChatBinding
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,12 +66,15 @@ class ChatFragment : Fragment() {
             }
     }*/
     private lateinit var binding: FragmentChatBinding
+    private val args: ChatFragmentArgs by navArgs()
+    @Inject
+    lateinit var contactRepository: ContactsRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentChatBinding.inflate(
             inflater,
             container,
@@ -75,5 +85,22 @@ class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val id = args.id
+
+        //val contactRepository = ContactsRepository()
+        val contact: Contact? = contactRepository.contacts.find {
+            it.id == id
+        }
+        contact?.let { binding.contactName.text = "${it.name}" }
+
+        val listAdapter = MessageListAdapter(::toChat)
+        val repo = MessageRepository()
+        listAdapter.submitList(repo.messages)
+        binding.chat.adapter = listAdapter
+    }
+
+    private fun toChat(view: View, message: Message) {
+        val action = ChatFragmentDirections.actionChatFragmentToMessageRepository(message.texto)
+        findNavController().navigate(action)
     }
 }
