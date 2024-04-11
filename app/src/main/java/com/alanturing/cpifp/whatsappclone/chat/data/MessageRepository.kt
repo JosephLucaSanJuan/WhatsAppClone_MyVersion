@@ -11,10 +11,10 @@ class MessageRepository {
 
     fun addMessage(message: Message){
         mensajes.add(
-            Message("",
-                             "",
-                             Clock.System.now(),
-                             true)
+            Message(1,
+                    "",
+                    Clock.System.now(),
+                    true)
         )
     }
 }
