@@ -93,10 +93,12 @@ class ChatFragment : Fragment() {
         }
         contact?.let { binding.contactName.text = "${it.name}" }
 
-        val listAdapter = MessageListAdapter(::toChat)
-        val repo = MessageRepository()
+        val listAdapter = MessageListAdapter()
+        /*val repo = MessageRepository()
         listAdapter.submitList(repo.messages)
-        binding.chat.adapter = listAdapter
+        binding.chat.adapter = listAdapter*/
+        val rv = binding.contactName
+        rv.layoutManager
     }
 
     private fun toChat(view: View, message: Message) {

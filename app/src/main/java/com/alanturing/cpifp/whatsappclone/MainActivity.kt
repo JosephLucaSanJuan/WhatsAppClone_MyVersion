@@ -7,6 +7,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.alanturing.cpifp.whatsappclone.chat.data.ChatRepository
 import com.alanturing.cpifp.whatsappclone.chat.ui.ChatListAdapter
+import com.alanturing.cpifp.whatsappclone.chat.ui.MessageListAdapter
 import com.alanturing.cpifp.whatsappclone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,10 @@ class MainActivity : AppCompatActivity() {
         navigationBar.setupWithNavController(navControlller)
 
         /*val dataset = ChatRepository.getInstance()
-        val customAdapter = ChatListAdapter(dataset)
+        val customAdapter = ChatListAdapter(dataset)*/
+
+        val customAdapter = MessageListAdapter()
         val recyclerView: RecyclerView = findViewById(R.id.fragment_container)
-        recyclerView.adapter = customAdapter*/
+        recyclerView.adapter = customAdapter
     }
 }
