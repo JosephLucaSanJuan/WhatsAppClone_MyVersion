@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alanturing.cpifp.whatsappclone.R
 import com.alanturing.cpifp.whatsappclone.chat.data.Contact
 import com.alanturing.cpifp.whatsappclone.chat.data.ContactsRepository
@@ -93,16 +94,20 @@ class ChatFragment : Fragment() {
         }
         contact?.let { binding.contactName.text = "${it.name}" }
 
-        val listAdapter = MessageListAdapter()
-        /*val repo = MessageRepository()
-        listAdapter.submitList(repo.messages)
-        binding.chat.adapter = listAdapter*/
+        /*val listAdapter = MessageListAdapter(::toChat)
+        binding.chat.layoutManager = LinearLayoutManager(context)
+        val repo = MessageRepository()
+        listAdapter.submitList(repo.getMessages())
+        binding.chat.adapter = listAdapter
         val rv = binding.contactName
-        rv.layoutManager
+        rv.setOnClickListener {
+            val action = ChatListFragmentDirections.actionChatListFragmentToChatFragment()
+            findNavController().navigate(action)
+        }*/
     }
 
-    private fun toChat(view: View, message: Message) {
+    /*private fun toChat(view: View, message: Message) {
         val action = ChatFragmentDirections.actionChatFragmentToMessageRepository(message.texto)
         findNavController().navigate(action)
-    }
+    }*/
 }
