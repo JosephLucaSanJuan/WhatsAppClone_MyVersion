@@ -8,6 +8,7 @@ import com.alanturing.cpifp.whatsappclone.chat.data.MessageRepositoryInterface
 import com.alanturing.cpifp.whatsappclone.chat.data.local.AppDatabase
 import com.alanturing.cpifp.whatsappclone.chat.data.local.MessageDao
 import com.alanturing.cpifp.whatsappclone.chat.data.local.MessageLocalRepository
+import com.alanturing.cpifp.whatsappclone.register.data.RegisterRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -75,8 +76,8 @@ class NetworkServiceModule {
     @Provides
     @Singleton
     @NetworkRepository
-    fun provideNetworkRepository(api: WhatsAppCloneService):MessageRepositoryInterface{
-        return MessageNetworkRepository(api)
+    fun provideNetworkRepository(api: WhatsAppCloneService, regRep: RegisterRepository):MessageRepositoryInterface{
+        return MessageNetworkRepository(api, regRep)
     }
 
     @Provides

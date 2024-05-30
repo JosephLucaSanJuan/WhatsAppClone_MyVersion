@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.alanturing.cpifp.whatsappclone.core.network.ContactResponse
 import com.alanturing.cpifp.whatsappclone.core.network.WhatsAppCloneService
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -56,5 +57,12 @@ class RegisterRepository @Inject constructor(@ApplicationContext val context: Co
         }
         /*val response = networkService.getUserByPhone("00000")
         return response.isSuccessful && response.body()!!.phone == */
+    }
+
+    suspend fun getUser():String {
+        val localPhone = context.dataStore.data.map {
+            it[PHONE_KEY] ?: ""
+        }.first()
+        return localPhone
     }
 }

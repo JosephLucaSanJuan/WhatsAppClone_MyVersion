@@ -1,6 +1,7 @@
 package com.alanturing.cpifp.whatsappclone.chat.data
 
 import android.widget.Adapter
+import com.alanturing.cpifp.whatsappclone.chat.data.local.toInternalModel
 import java.time.Clock
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,6 +31,13 @@ class MessageRepository /*@Inject*/ constructor(
     }
 
     override suspend fun createMessages(messages: List<Message>) {
-        TODO("Not yet implemented")
+        messages.toInternalModel().forEach {
+            networkRepository.createMessages(messages)
+        }
+        return localRepository.createMessages(messages)
+    }
+
+    override suspend fun readMessages(): List<Message> {
+        return localRepository.readMessages()
     }
 }

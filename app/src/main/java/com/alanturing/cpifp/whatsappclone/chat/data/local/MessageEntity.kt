@@ -18,3 +18,12 @@ fun List<MessageEntity>.toExternalModel(): List<Message> {
         )
     }
 }/**/
+
+fun List<Message>.toInternalModel(): List<MessageEntity> {
+    return this.map {
+        MessageEntity(
+            id = it.interlocutor,
+            text = it.texto
+        )
+    }
+}

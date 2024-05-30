@@ -12,6 +12,13 @@ class MessageLocalRepository(
     }
 
     override suspend fun createMessages(messages: List<Message>) {
-        TODO("Not yet implemented")
+        messages.toInternalModel().forEach {
+            messageDao.createMessage(it)
+        }
+    }
+
+    override suspend fun readMessages(): List<Message> {
+        val messages = messageDao.getAllMessages()
+        return messages.toExternalModel()
     }
 }
