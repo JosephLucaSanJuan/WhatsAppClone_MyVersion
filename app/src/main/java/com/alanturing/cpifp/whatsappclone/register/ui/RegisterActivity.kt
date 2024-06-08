@@ -33,14 +33,14 @@ class RegisterActivity: AppCompatActivity() {
                     binding.progressIndicator.visibility = View.GONE
                     binding.registerInput.error = null
                     when(uiState) {
-                        is UiState.started -> {}
-                        is UiState.error -> {
+                        is UiState.Started -> {}
+                        is UiState.Error -> {
                             binding.registerInput.error = uiState.error
                         }
-                        is UiState.loading -> {
+                        is UiState.Loading -> {
                             binding.progressIndicator.visibility = View.VISIBLE
                         }
-                        is UiState.success -> {
+                        is UiState.Success -> {
                             startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                             finish()
                         }

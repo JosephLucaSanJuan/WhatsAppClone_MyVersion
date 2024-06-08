@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.alanturing.cpifp.whatsappclone"
-        minSdk = 30
+        minSdk = 28
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -65,8 +65,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     //DataStore
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     //Room

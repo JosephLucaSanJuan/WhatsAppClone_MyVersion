@@ -11,16 +11,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed class UiState {
-    object started: UiState()
-    class success(private val User:UserUiState):UiState()
-    class error(public val error:String):UiState()
+    data object Started: UiState()
+    class Success(private val user:UserUiState):UiState()
+    class Error(public val error:String):UiState()
 
-    object loading: UiState()
+    data object Loading: UiState()
 }
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val repository: RegisterRepository):ViewModel() {
-    private val user: MutableStateFlow<UiState> = MutableStateFlow(UiState.started)
+class RegisterViewModel @Inject constructor():ViewModel() {
+    @Inject
+    lateinit var repository: RegisterRepository
+    private val user: MutableStateFlow<UiState> = MutableStateFlow(UiState.Started)
     val usuario: StateFlow<UiState>
         get() = user.asStateFlow()
 
@@ -30,11 +32,11 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
         viewModelScope.launch {
             val newUSer = repository.register(phone)
             if (newUSer != null) {
-                user.value = UiState.success(UserUiState(phone))
+                user.value = UiState.Success(UserUiState(phone))
             }
             else {
                 // Mostrar un mensaje de error
-                user.value = UiState.error("El usuario ya existe")
+                user.value = UiState.Error("El usuario ya existe")
             }
         }/**/
 
@@ -44,7 +46,7 @@ class RegisterViewModel @Inject constructor(private val repository: RegisterRepo
         viewModelScope.launch {
             val user = repository.isRegistered()
         }
-        user.value = UiState.success(UserUiState("814145143"))
+        user.value = UiState.Success(UserUiState("814145143"))
         return false
     }
 }
